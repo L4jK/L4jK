@@ -30,7 +30,7 @@ window.addEventListener("scroll", myFunction);
 function myFunction() {
 var scrollpercent = (document.body.scrollTop + document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 
-  document.getElementById("container").style.padding-top = scrollpercent;
+  document.getElementById("container").style.padding = scrollpercent;
   document.getElementById("container").style.position = relative;
   document.getElementById("container").style.width = "100%";
   document.getElementById("container").style.overflow = hidden;
