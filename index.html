@@ -6,13 +6,6 @@
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  <title>Document</title>
  <style>
-.container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-top: 50%; /* 1:1 Aspect Ratio */
-}
-
 .responsive-iframe {
   position: absolute;
   top: 0;
@@ -26,9 +19,22 @@
 </style>
  </head> 
 <body>
-<div class="container"> 
+<div id="container"> 
 <iframe class="responsive-iframe" src="https://script.google.com/macros/s/AKfycbxL5RuMGHMKPmJFVspztXuC6FEVQEW5qEdA57ZewXGpEQ6clNHwt5ae0xqkc5HolOIq/exec">
 </iframe>
 </div>
+ <script>
+// Find scroll percentage on scroll (using cross-browser properties), and offset dash same amount as percentage scrolled
+window.addEventListener("scroll", myFunction);
+
+function myFunction() {
+var scrollpercent = (document.body.scrollTop + document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+  document.getElementById("container").style.padding-top = scrollpercent;
+  document.getElementById("container").style.position = relative;
+  document.getElementById("container").style.width = "100%";
+  document.getElementById("container").style.overflow = hidden;
+}
+</script>
 </body>
 </html>
