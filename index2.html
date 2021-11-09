@@ -34,10 +34,24 @@
 
 <style>
 html,body,div,span,p,a,img,section{margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;}
-section{display: block;}
-body{line-height: 1;}
-html{box-sizing: border-box;}
-*,*:before,*:after{box-sizing: inherit;}
+section{
+display: block;
+scroll-snap-align: start;
+position: relative;
+/*padding: 1rem;
+border: 1px dotted black;*/
+height: 100vh;
+}
+body{
+line-height: 1;
+}
+html{
+box-sizing: border-box;
+scroll-snap-type: mandatory;
+scroll-snap-points-y: repeat(100vh);
+scroll-snap-type: y mandatory;
+}
+/* *,*:before,*:after{box-sizing: inherit;}*/
 a{display: block;}
 .video{width: 100vw; height: 100vw; position: absolute; top: 0; left: 0; z-index: 0;}
 .video #videoHome{align-items: center; display: flex; flex-direction: column; justify-content: center; position: relative; height: 100%; width: 100%;}
@@ -45,6 +59,7 @@ a{display: block;}
 .home{background-color: #000; position: relative; max-width: 100%; height: 100vh; width: 100vw; overflow: hidden;}
 .home__top{align-items: center; display: flex; justify-content: space-between; position: absolute; padding: 1rem 2rem; top: 0; left: 0; width: 100%; z-index: 9;}
 .home__logo svg{width: 159px; height: 180px; fill: white;}
+.section__logo svg{width: 159px; height: 180px; fill: black;}
 .home__social{display: flex; justify-content: flex-end;}
 .home__social a{margin: 0 .5rem; display: flex; align-items: center;}
 .home__social a svg{fill: white; width: 20px; height: 20px;}
@@ -92,13 +107,82 @@ a{display: block;}
   font-size:48px;
   color:#fff
 }
+.scrollout {
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollout::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollout {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.arrowdow>svg {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    animation-name: fadeInDown;
+	stroke: white;
+    animation-duration: .8s;
+    animation-iteration-count: infinite;
+	width: 35px;
+    height: 12px;
+}
+.arrowup>svg {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    animation-name: fadeInUp;
+	stroke: white;
+    animation-duration: .8s;
+    animation-iteration-count: infinite;
+	width: 35px;
+    height: 12px;
+}
+@-webkit-keyframes fadeInDown{from{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}}
+@keyframes fadeInDown{from{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}}
+@-webkit-keyframes fadeInUp{from{opacity:0;-webkit-transform:translate3d(0,75%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:translate3d(0,-25%,0);transform:translate3d(0,-25%,0)}}
+@keyframes fadeInUp{from{opacity:0;-webkit-transform:translate3d(0,75%,0);transform:translate3d(0,75%,0)}to{opacity:1;-webkit-transform:translate3d(0,-25%,0);transform:translate3d(0,-25%,0)}}
+
+.dot {
+  height: 35px;
+  width: 35px;
+  background-color: #000;
+  border-radius: 50%;
+  display: inline-block;
+  float: right;
+}
+
+.seccont {
+  font-family: Arial;
+  margin: 0 auto; /* Center website */
+  max-width: 80%; /* Max width */
+  padding: 20px;
+  background-color: #fff;
+  border: 1px dotted black;
+}
+
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200;1,700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="scrollout">
 
 
 <svg display="none" width="0" height="0" version="1.1">
@@ -129,14 +213,21 @@ a{display: block;}
 </path>
 </symbol>
 <symbol id="icon-l4jk" viewBox="0 0 159 180">
-<path d="M396 1548 c-2 -7 -11 -44 -21 -83 -9 -38 -20 -88 -26 -110 -5 -22 -31 -137 -58 -255 -27 -118 -52 -227 -56 -242 l-7 -28 251 0 c138 0 251 -3 251 -6 0 -3 -9 -45 -21 -92 -11 -48 -25 -109 -31 -137 -28 -131 -60 -188 -114 -201 -29 -7 -133 0 -156 10 -16 7 -18 1 -18 -73 l0 -81 110 0 c133 0 198 20 263 83 52 51 73 103 121 302 31 128 40 152 63 172 16 12 31 22 34 23 3 0 40 -63 83 -140 l78 -140 105 0 105 0 -20 33 c-81 137 -192 336 -192 344 0 5 28 36 63 68 195 182 203 192 201 227 -1 18 -2 36 -3 41 0 4 -30 7 -64 7 -52 0 -67 -4 -83 -21 -50 -55 -275 -261 -280 -256 -4 3 -1 27 5 54 55 232 81 345 81 358 0 12 -17 15 -97 15 l-98 0 -192 -192 c-106 -106 -194 -190 -197 -187 -3 2 -1 20 3 39 5 19 30 127 55 240 26 113 50 213 52 223 5 15 -4 17 -91 17 -68 0 -97 -4 -99 -12z m402 -434 c-12 -54 -24 -102 -27 -106 -3 -3 -45 -8 -93 -10 l-88 -3 112 112 c62 62 113 111 115 109 2 -1 -7 -47 -19 -102z"  stroke="none" transform="translate(0,180) scale(0.1,-0.1)"/>
+<path stroke="none" transform="translate(0,180) scale(0.1,-0.1)" d="M396 1548 c-2 -7 -11 -44 -21 -83 -9 -38 -20 -88 -26 -110 -5 -22 -31 -137 -58 -255 -27 -118 -52 -227 -56 -242 l-7 -28 251 0 c138 0 251 -3 251 -6 0 -3 -9 -45 -21 -92 -11 -48 -25 -109 -31 -137 -28 -131 -60 -188 -114 -201 -29 -7 -133 0 -156 10 -16 7 -18 1 -18 -73 l0 -81 110 0 c133 0 198 20 263 83 52 51 73 103 121 302 31 128 40 152 63 172 16 12 31 22 34 23 3 0 40 -63 83 -140 l78 -140 105 0 105 0 -20 33 c-81 137 -192 336 -192 344 0 5 28 36 63 68 195 182 203 192 201 227 -1 18 -2 36 -3 41 0 4 -30 7 -64 7 -52 0 -67 -4 -83 -21 -50 -55 -275 -261 -280 -256 -4 3 -1 27 5 54 55 232 81 345 81 358 0 12 -17 15 -97 15 l-98 0 -192 -192 c-106 -106 -194 -190 -197 -187 -3 2 -1 20 3 39 5 19 30 127 55 240 26 113 50 213 52 223 5 15 -4 17 -91 17 -68 0 -97 -4 -99 -12z m402 -434 c-12 -54 -24 -102 -27 -106 -3 -3 -45 -8 -93 -10 l-88 -3 112 112 c62 62 113 111 115 109 2 -1 -7 -47 -19 -102z">
 </path>
 </symbol>
+<symbol id="icon-l4jk2" viewBox="0 0 159 180">
+<path stroke="none" transform="translate(0,180) scale(0.1,-0.1)" d="M396 1548 c-2 -7 -11 -44 -21 -83 -9 -38 -20 -88 -26 -110 -5 -22 -31 -137 -58 -255 -27 -118 -52 -227 -56 -242 l-7 -28 251 0 c138 0 251 -3 251 -6 0 -3 -9 -45 -21 -92 -11 -48 -25 -109 -31 -137 -28 -131 -60 -188 -114 -201 -29 -7 -133 0 -156 10 -16 7 -18 1 -18 -73 l0 -81 110 0 c133 0 198 20 263 83 52 51 73 103 121 302 31 128 40 152 63 172 16 12 31 22 34 23 3 0 40 -63 83 -140 l78 -140 105 0 105 0 -20 33 c-81 137 -192 336 -192 344 0 5 28 36 63 68 195 182 203 192 201 227 -1 18 -2 36 -3 41 0 4 -30 7 -64 7 -52 0 -67 -4 -83 -21 -50 -55 -275 -261 -280 -256 -4 3 -1 27 5 54 55 232 81 345 81 358 0 12 -17 15 -97 15 l-98 0 -192 -192 c-106 -106 -194 -190 -197 -187 -3 2 -1 20 3 39 5 19 30 127 55 240 26 113 50 213 52 223 5 15 -4 17 -91 17 -68 0 -97 -4 -99 -12z m402 -434 c-12 -54 -24 -102 -27 -106 -3 -3 -45 -8 -93 -10 l-88 -3 112 112 c62 62 113 111 115 109 2 -1 -7 -47 -19 -102z">
+</path>
+</symbol>
+<symbol id="icon-uparrow" viewBox="0 0 40 23"><path d="M38 21L20 3L2 21" stroke-width="4"/></symbol>
+<symbol id="icon-downarrow" viewBox="0 0 40 23"><path d="M2 2L20 20L38 2" stroke-width="4"/></symbol>
 </svg>
-<section class="home">
+
+<section id="section1" class="home">
 
 <div class="video">
-<video id="videoHome" src="https://l4jk.github.io/L4jK/bg.mp4" loop="" autoplay="" muted="" playsinline=""></video>
+<video id="videoHome" src="bg.mp4" loop="" autoplay="" muted="" playsinline=""></video>
 </div>
 <div class="home__top">
 <div class="home__logo"><svg><use xlink:href="#icon-l4jk"></use></svg>
@@ -177,10 +268,222 @@ a{display: block;}
 </div>
 <div class="home__button button">
 <div id="div1" class="fa"></div>
-<a class="enter">Tentar acessar mesmo assim</a>
+<a class="enter" href="#section2">Tentar acessar mesmo assim</a>
 <div class="hide"><a>tem certeza?</a><a class="sim">sim</a><a class="nao">não</a></div>
 </div>
 </section>
+
+<div id="main">
+
+<section id="section2">
+<div class="section__logo"><svg><use xlink:href="#icon-l4jk2"></use></svg>
+</div>
+<a href="#section1"><div class="arrowup dot"><svg><use xlink:href="#icon-uparrow"></use></svg></div></a>
+		<h1>Section Two</h1>
+<a href="#section3"><div class="arrowdow dot"><svg><use xlink:href="#icon-downarrow"></use></svg></div></a>		
+</section>
+
+<section id="section3">
+<div class="section__logo"><svg><use xlink:href="#icon-l4jk2"></use></svg>
+</div>
+<a href="#section2"><div class="arrowup dot"><svg><use xlink:href="#icon-uparrow"></use></svg></div></a>
+		<h1>Section Three</h1>
+<a href="#section4"><div class="arrowdow dot"><svg><use xlink:href="#icon-downarrow"></use></svg></div></a>		
+</section>
+
+<section id="section4">
+<div class="section__logo"><svg><use xlink:href="#icon-l4jk2"></use></svg>
+</div>
+<a href="#section3"><div class="arrowup dot"><svg><use xlink:href="#icon-uparrow"></use></svg></div></a>
+		<h1>Section Four</h1>
+<a href="#section5"><div class="arrowdow dot"><svg><use xlink:href="#icon-downarrow"></use></svg></div></a>
+</section>
+
+<section id="section5">
+<div class="section__logo"><svg><use xlink:href="#icon-l4jk2"></use></svg>
+</div>
+<a href="#section4"><div class="arrowup dot"><svg><use xlink:href="#icon-uparrow"></use></svg></div></a>
+<span class="heading">Stars Earned</span><span class="fa fa-star checked"></span>
+		<h1>Section Five</h1>
+</section>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+const divResult = document.getElementById("main");
+
+async function getRepos() {
+        clear();
+        const url = "https://api.github.com/search/repositories?q=user:L4jK"
+        const response = await fetch(url)
+        const result = await response.json()
+		
+		for (let i = 0; i < result.total_count; i++){
+		
+            const sect = document.createElement("section")
+			sect.id = "section" + (i+2);
+			
+			const divl = document.createElement("div")
+			const attdl = document.createAttribute("class");
+			attdl.value = "section__logo"; 
+			divl.setAttributeNode(attdl);
+			
+			const svgl = document.createElementNS('http://www.w3.org/2000/svg',"svg")
+			const svgContentl = '<use xlink:href="#icon-l4jk2"></use>'
+			svgl.innerHTML = svgContentl;
+			divl.appendChild(svgl)
+			
+			const arr1 = document.createElement("a")
+			arr1.href = "#section" + (i+1);
+			
+			const arr2 = document.createElement("a")
+			arr2.href = "#section" + (i+3);
+			
+			const divau = document.createElement("div")
+			const attaul = document.createAttribute("class");
+			attaul.value = "arrowup dot"; 
+			divau.setAttributeNode(attaul);
+			
+			const svgau = document.createElementNS('http://www.w3.org/2000/svg',"svg")                   
+			const svgContentau = '<use xlink:href="#icon-uparrow"></use>'
+			svgau.innerHTML = svgContentau;
+			divau.appendChild(svgau)
+			
+            arr1.appendChild(divau)			
+	
+			const divad = document.createElement("div")
+			const attadl = document.createAttribute("class");
+			attadl.value = "arrowdow dot"; 
+			divad.setAttributeNode(attadl);
+			
+			const svgad = document.createElementNS('http://www.w3.org/2000/svg',"svg")                  
+			const svgContentad = '<use xlink:href="#icon-downarrow"></use>';
+			svgad.innerHTML = svgContentad;
+			divad.appendChild(svgad)
+			
+			arr2.appendChild(divad)
+			
+			const divc = document.createElement("div")
+			const divcc = document.createAttribute("class");
+			divcc.value = "seccont"; 
+			divc.setAttributeNode(divcc);
+			
+			const divcheading = '<span class="heading">Stars Earned</span>';
+			divc.innerHTML = divcheading;
+			
+			const starc = document.createElement("span")
+			const starcc = document.createAttribute("class");
+			starcc.value = "fa fa-star checked"; 
+			starc.setAttributeNode(starcc);
+			
+			const starco = document.createTextNode(result.items[i].stargazers_count);
+			starc.appendChild(starco);
+
+			divc.appendChild(starc);
+			
+			const divcContentad = '<hr style="border:3px solid #f1f1f1">';
+			divc.innerHTML = divcContentad;
+			
+			const list = document.createElement("dl")
+			
+			const listc0 = document.createElement("dt")
+			listc0.textContent = "Page Link:";
+			list.appendChild(listc0)
+			
+			const listcc0 = document.createElement("dd")
+
+            const anchor0 = document.createElement("a")
+            anchor0.href = "https://l4jk.github.io/"+result.items[i].name+"/";
+            anchor0.textContent = "- https://l4jk.github.io/"+result.items[i].name+"/";
+			listcc0.appendChild(anchor0)
+			
+			list.appendChild(listcc0)
+			
+			const listc1 = document.createElement("dt")
+			listc1.textContent = "Rpository Link:";
+			list.appendChild(listc1)
+			
+			const listcc1 = document.createElement("dd")
+
+            const anchor = document.createElement("a")
+            anchor.href = result.items[i].html_url;
+            anchor.textContent = "- "+result.items[i].full_name;
+			listcc1.appendChild(anchor)
+			
+			list.appendChild(listcc1)
+			
+			const listc2 = document.createElement("dt")
+			listc2.textContent = "language:";
+			list.appendChild(listc2)
+			
+			const listcc2 = document.createElement("dd")
+			listcc2.textContent = "- "+result.items[i].language;
+			list.appendChild(listcc2)
+			
+			const listc3 = document.createElement("dt")
+			listc3.textContent = "watchers:";
+			list.appendChild(listc3)
+			
+			const listcc3 = document.createElement("dd")
+			listcc3.textContent = "- "+result.items[i].watchers;
+			list.appendChild(listcc3)
+			
+			const listc4 = document.createElement("dt")
+			listc4.textContent = "description:";
+			list.appendChild(listc4)
+			
+			const listcc4 = document.createElement("dd")
+			listcc4.textContent = "- "+result.items[i].description;
+			list.appendChild(listcc4)
+						
+			console.log(result.items[i].language)
+			
+            divc.appendChild(list)
+			
+			sect.appendChild(divl)
+			sect.appendChild(arr1)
+			sect.appendChild(divc)
+			if( i != (result.total_count-1)){
+			sect.appendChild(arr2)
+			}
+			
+			divResult.appendChild(sect)
+          
+
+        }
+		
+init();
+    }
+	function clear(){
+        while(divResult.firstChild) 
+            divResult.removeChild(divResult.firstChild)
+    }
+const init = function(){
+	let items = document.querySelectorAll('section');
+	for (let i = 1; i < items.length; i++){
+	const randomColor = Math.floor(Math.random()*16777215).toString(16);
+		items[i].style.background = "#" + randomColor;
+	}
+}
+
+getRepos();
+
+</script>
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+        window.location.hash = hash;
+      });
+    }
+  });
+});
+</script>
 <script>
 function openfolder() {
   var a;
