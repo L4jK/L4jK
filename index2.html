@@ -176,6 +176,9 @@ a{display: block;}
 .checked {
   color: orange;
 }
+hr {
+  border:3px solid #f1f1f1;
+}
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@700&display=swap" rel="stylesheet">
@@ -376,13 +379,13 @@ async function getRepos() {
 			starcc.value = "fa fa-star checked"; 
 			starc.setAttributeNode(starcc);
 			
-			const starco = document.createTextNode(result.items[i].stargazers_count);
+			const starco = document.createTextNode(" "+result.items[i].stargazers_count);
 			starc.appendChild(starco);
 
 			divc.appendChild(starc);
 			
-			const divcContentad = '<hr style="border:3px solid #f1f1f1">';
-			divc.innerHTML = divcContentad;
+			const divcContentad = document.createElement("hr");
+			divc.appendChild(divcContentad);
 			
 			const list = document.createElement("dl")
 			
